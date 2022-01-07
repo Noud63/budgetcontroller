@@ -53,7 +53,6 @@ function calculateBudget() {
 //Display budget
 const displayBudget = (budget) => {
     let sign;
-
     if (budget >= 0) {
         sign = '+'
     } else {
@@ -68,7 +67,6 @@ const displayBudget = (budget) => {
     } else {
         document.querySelector('.budget').classList.remove('red')
     }
-
 }
 
 
@@ -101,7 +99,6 @@ function getTimeStamp() {
         hour = '0' + hour
     }
     let created = year + "-" + month + '-' + day + ' ' + hour + ':' + minute + 'h';
-
     return created;
 }
 
@@ -143,15 +140,11 @@ const halveItemsList = (type) => {
     if (data.items[type].length > 100) {
         data.items[type].splice(0, half)
     }
-
-    if (data.items[type].length > 100) {
-        data.items[type].splice(0, half)
-    }
     localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
-//Add input to UI, calculate budget, store values in datastructure
+//Render UI, calculate budget, store values in datastructure
 const parseData = () => {
 
     const inputData = getInput()
@@ -167,7 +160,6 @@ const parseData = () => {
     }
     clearAllFields()
     localStorage.setItem('DATA', JSON.stringify(data))
-    console.log(data)
 }
 
 
