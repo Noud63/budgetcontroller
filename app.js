@@ -3,7 +3,6 @@
 
 //------------------------------- BUDGET CONTROLLER APP ------------------------------//
 
-
 // datastructure
 let data = {
     plus: [],      // Deposit values
@@ -16,7 +15,7 @@ let data = {
 }
 
 
-//Get input values on clicking submit button
+//Get input values when submit button is clicked
 const getInput = () => {
     return {
         type: document.querySelector('.select_type').value,
@@ -62,6 +61,7 @@ const displayBudget = (budget) => {
     let element = document.querySelector('.budgetTotal')
     element.innerHTML = `<div class="saldo">${sign} &euro; ${budget.toFixed(2)}</div>`
 
+//Change default background-color to red when budget is negative
     if (sign === '-') {
         document.querySelector('.budget').classList.add('red')
     } else {
@@ -202,7 +202,7 @@ localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
-//EventListener attached to submit button
+//EventListener attached to submit button and 'remove item'
 function setUpEventListeners() {
     const btns = [...document.querySelectorAll('.btn')]
     btns.forEach(btn => {
@@ -222,7 +222,7 @@ function setUpEventListeners() {
 }
 
 
-//Initial state, get data from localStorage if any
+//Initial state, get data from localStorage, if any, and set eventListeners
 function init() {
 
     const data = JSON.parse(localStorage.getItem("DATA"))
