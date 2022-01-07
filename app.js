@@ -62,11 +62,10 @@ const displayBudget = (budget) => {
     element.innerHTML = `<div class="saldo">${sign} &euro; ${budget.toFixed(2)}</div>`
 
 //Change default background-color to red when budget is negative
-    if (sign === '-') {
-        document.querySelector('.budget').classList.add('red')
-    } else {
-        document.querySelector('.budget').classList.remove('red')
-    }
+    sign === '-' ? document.querySelector('.budget').classList.add('red') : document.querySelector('.budget').classList.remove('red')
+    sign === '-' ? document.querySelector('.smile_sad').innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' : 
+        document.querySelector('.smile_sad').innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
+
 }
 
 
@@ -133,6 +132,21 @@ const displayObject = (obj, type) => {
 }
 
 
+//Down arrow appears at bottom of list items if list length exceeds 7
+const addScrollSign = () => {
+    if(data.items.plus.length >= 7){
+        document.querySelector('.scrollSignLeft').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
+    }else{
+        document.querySelector('.scrollSignLeft').innerHTML = ""
+    }
+    if (data.items.minus.length >= 7){
+        document.querySelector('.scrollSignRight').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
+    } else {
+        document.querySelector('.scrollSignRight').innerHTML = ""
+    }
+}
+
+
 //If deposit or withdrawal list is longer then 100, half of the list will be deleted at page refresh or page reload
 const halveItemsList = (type) => {
     let half = Math.ceil(data.items[type].length) / 2
@@ -158,6 +172,7 @@ const parseData = () => {
     } else {
         alert('Fill out input fields with required data!')
     }
+    addScrollSign()
     clearAllFields()
     localStorage.setItem('DATA', JSON.stringify(data))
 }
@@ -176,6 +191,7 @@ const deleteItem = (e) => {
     }
     deleteValueFromData(ID, type)
     deleteItemFromData(ID, type)
+    addScrollSign()
 }
 
 
@@ -238,6 +254,7 @@ function init() {
             calculateBudget()
             displayBudget(data.budget)
             storeValues(type, value)
+            addScrollSign()
         })
     }
     setUpEventListeners()
