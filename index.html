@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>test</title>
+</head>
+
+<body>
+
+<div class="wrapper">
+    
+    <div class="account">- Budget Controller -</div>
+    <div class="menu">
+        <div class="payments">Current Account</div>
+        <div class="savings">Savings</div>
+    </div>
+    <div class="fields">
+        <div class="plusmin">
+            <select class="select_type">
+                <option value="plus" selected>+</option>
+                <option value="minus">-</option>
+            </select>
+        </div>
+
+        <div class="description">
+            <input type="text" class="add_description" placeholder="Description">
+        </div>
+
+        <div class="value">
+            <input type="number" class="add_value" placeholder="Value">
+        </div>
+
+        <button type="button" class="btn1 btn">Submit</button>
+
+    </div>
+    <button type="button" class="btn2 btn">Submit</button>
+
+    <div class="budget">
+        <div class="budgetTitle">Available Budget</div>
+        <div class="budgetTotal">&euro; 0.00</div>
+    </div>
+
+
+    <div class="container">
+        <div class="plusBox">
+            <div class="plus">Deposits</div>
+            <div class="pluscontainer delete"></div>
+        </div>
+
+        <div class="minusBox">
+            <div class="minus">Withdrawals</div>
+            <div class="minuscontainer delete"></div>
+        </div>
+
+    </div>
+
+</div>
+ 
+    
+    <script type="module" src="app.js"></script>
+</body>
+</html>
