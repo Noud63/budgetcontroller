@@ -10,7 +10,7 @@ let data = {
     budget: 0,
     totals: {
         plus: 0,
-        minus:0
+        minus: 0
     },
     items: {
         plus: [],  // Array of deposit objects
@@ -55,16 +55,16 @@ function calculateBudget() {
 
 const calcTotals = (type) => {
     let sum = 0;
-    data[type].forEach( el => {
+    data[type].forEach(el => {
         sum = sum + el
     })
-     data.totals[type] = sum
+    data.totals[type] = sum
 }
 
 
 const displayTotals = () => {
-      document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
-      document.querySelector('.withTotal').innerHTML = '&euro;' + " " + data.totals.minus.toFixed(2)
+    document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
+    document.querySelector('.withTotal').innerHTML = '&euro;' + " " + data.totals.minus.toFixed(2)
 }
 
 
@@ -80,10 +80,10 @@ const displayBudget = (budget) => {
     let element = document.querySelector('.budgetTotal')
     element.innerHTML = `<div class="saldo">${sign} &euro; ${budget.toFixed(2)}</div>`
 
-    
-//Change default background-color to red when budget is negative
+
+    //Change default background-color to red when budget is negative
     sign === '-' ? document.querySelector('.budget').classList.add('red') : document.querySelector('.budget').classList.remove('red')
-    sign === '-' ? document.querySelector('.smile_sad').innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' : 
+    sign === '-' ? document.querySelector('.smile_sad').innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' :
         document.querySelector('.smile_sad').innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
 
 }
@@ -154,12 +154,12 @@ const displayObject = (obj, type) => {
 
 //Down arrow appears at bottom of list items if list length exceeds 7
 const addScrollSign = () => {
-    if(data.items.plus.length >= 7){
+    if (data.items.plus.length >= 7) {
         document.querySelector('.scrollSignLeft').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
-    }else{
+    } else {
         document.querySelector('.scrollSignLeft').innerHTML = ""
     }
-    if (data.items.minus.length >= 7){
+    if (data.items.minus.length >= 7) {
         document.querySelector('.scrollSignRight').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
     } else {
         document.querySelector('.scrollSignRight').innerHTML = ""
@@ -203,28 +203,24 @@ const parseData = () => {
 //Delete list item from UI
 const deleteItem = (e) => {
     let item = e.target.parentNode.parentNode
+    console.log(item.parentNode)
     let ID = e.target.parentNode.parentNode.id
     ID = ID.split('-')
     let type = ID[0]
     ID = parseFloat(ID[1])
 
-    if(ID && e.target.textContent === 'remove item'){
+    if (e.target.className === 'remove') {
         item.remove()
+        updateAllValues(ID, type)
+
     }
-    deleteValueFromData(ID, type)
-    deleteItemFromData(ID, type)
-    calculateBudget()
-    displayBudget(data.budget)
-    calcTotals(type)
-    displayTotals()
-    addScrollSign()
     localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
 //Delete list item from datastructure
 const deleteItemFromData = (id, type) => {
-    data.items[type] = data.items[type].filter( el => {
+    data.items[type] = data.items[type].filter(el => {
         return el.id !== id
     })
 }
@@ -232,12 +228,22 @@ const deleteItemFromData = (id, type) => {
 
 //Delete values from datastructure
 const deleteValueFromData = (id, type) => {
-    data.items[type].forEach((x) =>{ 
-        if(x.id === id){
-        let i = data.items[type].indexOf(x)
-           data[type].splice(i, 1)
+    data.items[type].forEach((x) => {
+        if (x.id === id) {
+            let i = data.items[type].indexOf(x)
+            data[type].splice(i, 1)
         }
     })
+}
+
+const updateAllValues = (ID, type) => {
+    deleteValueFromData(ID, type)
+    deleteItemFromData(ID, type)
+    calculateBudget()
+    displayBudget(data.budget)
+    calcTotals(type)
+    displayTotals()
+    addScrollSign()
 }
 
 
@@ -249,7 +255,7 @@ function setUpEventListeners() {
     })
 
     const deleteBtns = document.querySelectorAll('.delete')
-    deleteBtns.forEach( btn => {
+    deleteBtns.forEach(btn => {
         btn.addEventListener('click', deleteItem)
     })
 
@@ -280,9 +286,9 @@ function init() {
             addScrollSign()
             calcTotals(type)
             displayTotals()
-           })
+        })
     }
-    
+
     setUpEventListeners()
     console.log(data)
 }
