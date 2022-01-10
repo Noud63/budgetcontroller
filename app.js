@@ -53,6 +53,7 @@ function calculateBudget() {
 }
 
 
+//Calculate total deposites and withdrawals
 const calcTotals = (type) => {
     let sum = 0;
     data[type].forEach(el => {
@@ -62,6 +63,7 @@ const calcTotals = (type) => {
 }
 
 
+//Display totals at top of list
 const displayTotals = () => {
     document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
     document.querySelector('.withTotal').innerHTML = '&euro;' + " " + data.totals.minus.toFixed(2)
@@ -236,6 +238,8 @@ const deleteValueFromData = (id, type) => {
     })
 }
 
+
+//Update all values when item has been deleted
 const updateAllValues = (ID, type) => {
     deleteValueFromData(ID, type)
     deleteItemFromData(ID, type)
@@ -287,6 +291,10 @@ function init() {
             calcTotals(type)
             displayTotals()
         })
+    }
+
+    if(data.budget === 0){
+        document.querySelector('.smile_sad').innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
     }
 
     setUpEventListeners()
