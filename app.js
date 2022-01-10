@@ -8,6 +8,10 @@ let data = {
     plus: [],      // Deposit values
     minus: [],     // Withdrawal values
     budget: 0,
+    totals: {
+        plus: 0,
+        minus:0
+    },
     items: {
         plus: [],  // Array of deposit objects
         minus: []  // Array of withdrawal objects
@@ -49,6 +53,21 @@ function calculateBudget() {
 }
 
 
+const calcTotals = (type) => {
+    let sum = 0;
+    data[type].forEach( el => {
+        sum = sum + el
+    })
+     data.totals[type] = sum
+}
+
+
+const displayTotals = () => {
+      document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
+      document.querySelector('.withTotal').innerHTML = '&euro;' + " " + data.totals.minus.toFixed(2)
+}
+
+
 //Display budget
 const displayBudget = (budget) => {
     let sign;
@@ -61,6 +80,7 @@ const displayBudget = (budget) => {
     let element = document.querySelector('.budgetTotal')
     element.innerHTML = `<div class="saldo">${sign} &euro; ${budget.toFixed(2)}</div>`
 
+    
 //Change default background-color to red when budget is negative
     sign === '-' ? document.querySelector('.budget').classList.add('red') : document.querySelector('.budget').classList.remove('red')
     sign === '-' ? document.querySelector('.smile_sad').innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' : 
@@ -169,6 +189,8 @@ const parseData = () => {
         let budget = calculateBudget()
         displayBudget(budget)
         halveItemsList(inputData.type)
+        calcTotals(inputData.type)
+        displayTotals()
     } else {
         alert('Fill out input fields with required data!')
     }
@@ -191,7 +213,12 @@ const deleteItem = (e) => {
     }
     deleteValueFromData(ID, type)
     deleteItemFromData(ID, type)
+    calculateBudget()
+    displayBudget(data.budget)
+    calcTotals(type)
+    displayTotals()
     addScrollSign()
+    localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
@@ -200,9 +227,6 @@ const deleteItemFromData = (id, type) => {
     data.items[type] = data.items[type].filter( el => {
         return el.id !== id
     })
-    calculateBudget()
-    displayBudget(data.budget)
-    localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
@@ -214,7 +238,6 @@ const deleteValueFromData = (id, type) => {
            data[type].splice(i, 1)
         }
     })
-localStorage.setItem('DATA', JSON.stringify(data))
 }
 
 
@@ -255,9 +278,13 @@ function init() {
             displayBudget(data.budget)
             storeValues(type, value)
             addScrollSign()
-        })
+            calcTotals(type)
+            displayTotals()
+           })
     }
+    
     setUpEventListeners()
+    console.log(data)
 }
 
 init()

@@ -139,6 +139,7 @@ body {
     background-color: rgb(15, 77, 23);
     border-style: none;
     color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 .btn2 {
@@ -151,6 +152,7 @@ body {
     border-style: none;
     color: rgb(255, 255, 255);
     font-size: 1em;
+    cursor: pointer;
 }
 
 .budget {
@@ -281,11 +283,18 @@ body {
     justify-content: center;
 }
 
+.depTotal {
+ color: rgb(0, 173, 0);
+}
+
+.withTotal {
+    color: rgb(223, 0, 0);
+}
 
 .plus, .minus {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
      padding: 10px 0 10px 0;
      border-bottom: 2px solid rgb(126, 126, 126);
@@ -403,7 +412,6 @@ body {
     }
    
 }
-
 
 .scrollPng {
     width: 100%;
