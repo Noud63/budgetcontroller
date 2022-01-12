@@ -1,7 +1,7 @@
 // Run live-server if you are using type="module"!!
 // you can't run JS with "type='module'" directly in the browser without server.
 
-//------------------------------- BUDGET CONTROLLER APP ------------------------------//
+// ------------------------------- BUDGET CONTROLLER APP ------------------------------ //
 
 // datastructure
 let data = {
@@ -202,11 +202,16 @@ const parseData = () => {
 }
 
 
+const showMessage = () => {
+     document.querySelector('.overlay').style.display= "flex";
+
+}
+
+
 //Delete list item from UI
 const deleteItem = (e) => {
-    let item = e.target.parentNode.parentNode
-    console.log(item.parentNode)
-    let ID = e.target.parentNode.parentNode.id
+    let item = e.target.parentNode.parentNode;
+    let ID = e.target.parentNode.parentNode.id;
     ID = ID.split('-')
     let type = ID[0]
     ID = parseFloat(ID[1])
@@ -214,7 +219,6 @@ const deleteItem = (e) => {
     if (e.target.className === 'remove') {
         item.remove()
         updateAllValues(ID, type)
-
     }
     localStorage.setItem('DATA', JSON.stringify(data))
 }
@@ -251,7 +255,7 @@ const updateAllValues = (ID, type) => {
 }
 
 
-//EventListener attached to submit button and 'remove item'
+//EventListener attached to submit button and listcontainers
 function setUpEventListeners() {
     const btns = [...document.querySelectorAll('.btn')]
     btns.forEach(btn => {
@@ -293,8 +297,9 @@ function init() {
         })
     }
 
-    if(data.budget === 0){
-        document.querySelector('.smile_sad').innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
+    if (!data) {
+        document.querySelector('.smile_sad').innerHTML =
+            '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
     }
 
     setUpEventListeners()

@@ -179,6 +179,7 @@ body {
 }
 
 .container {
+    position: relative;
     width: 100%;
     height: 500px;
     margin: 0 auto;
@@ -394,7 +395,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    float: left;
 }
 
 .scrollSignRight {
@@ -403,7 +403,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
 @media only screen and (max-width: 520px) {
@@ -420,3 +419,32 @@ body {
     justify-content: center;
 }
 
+.overlay {
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+
+}
+
+.removeQuestion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 80px;
+    color: red;
+    background-color: white;
+}
+
+.removeBtn {
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border-style: none;
+    background-color: rgb(202, 0, 0);
+    color: white;
+}
