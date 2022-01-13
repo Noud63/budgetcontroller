@@ -307,10 +307,12 @@ function setUpEventListeners() {
 
 //Progressbar shows percentage of budget available
 const bar = document.getElementById('progress')
+const perc = document.querySelector('.percentage')
 const progress = (percentage) => {
-    document.querySelector('.percentage').innerText = percentage + '%'
+    perc.innerText = percentage + '%'
     bar.style.width = percentage + '%'
-    percentage < 20 ? bar.style.backgroundColor = 'red': bar.style.backgroundColor = 'green';
+    percentage < 20 ? (bar.style.backgroundColor = 'red', perc.style.backgroundColor = 'darkred') : 
+        (bar.style.backgroundColor = 'green', perc.style.backgroundColor = 'green')
 }
 
 
