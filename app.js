@@ -1,5 +1,5 @@
 // Run live-server if you are using type="module"!!
-// you can't run JS with "type='module'" directly in the browser without server.
+// you can't run JS with "type='module" directly in the browser without server.
 
 // ------------------------------- BUDGET CONTROLLER APP ------------------------------ //
 
@@ -15,7 +15,9 @@ let data = {
     items: {
         plus: [],  // Array of deposit objects
         minus: []  // Array of withdrawal objects
-    }
+    },
+    percentage: 0,
+    percentage2: 0
 }
 
 
@@ -60,6 +62,26 @@ const calcTotals = (type) => {
         sum = sum + el
     })
     data.totals[type] = sum
+}
+
+
+//Calculate percentages for progressbar
+const calcPercentages = () => {
+    let percentage = parseInt(data.budget / data.totals.plus * 100)
+
+    if(data.budget === 0){
+       percentage = 0
+    }
+    if(data.totals.plus === data.budget){
+        percentage = 100;
+    }
+    if (data.totals.plus === 0 && data.budget === 0){
+        percentage = 0
+    }
+    if(data.budget < 0 ){
+        percentage = 0
+    }
+    data.percentage = percentage
 }
 
 
@@ -121,6 +143,16 @@ function getTimeStamp() {
     }
     let created = year + "-" + month + '-' + day + ' ' + hour + ':' + minute + 'h';
     return created;
+}
+
+
+//Day today
+const date = () => {
+    var now = new Date();
+    var options = { month: "long", weekday: "long", day: "numeric"}
+    var newTime = now.toLocaleDateString("en-EN", options)
+    let today = newTime 
+    document.querySelector('.date').textContent = today
 }
 
 
@@ -193,18 +225,15 @@ const parseData = () => {
         halveItemsList(inputData.type)
         calcTotals(inputData.type)
         displayTotals()
+        calcPercentages()
+        progress(data.percentage)
+        
     } else {
         alert('Fill out input fields with required data!')
     }
     addScrollSign()
     clearAllFields()
     localStorage.setItem('DATA', JSON.stringify(data))
-}
-
-
-const showMessage = () => {
-     document.querySelector('.overlay').style.display= "flex";
-
 }
 
 
@@ -219,6 +248,8 @@ const deleteItem = (e) => {
     if (e.target.className === 'remove') {
         item.remove()
         updateAllValues(ID, type)
+        calcPercentages()
+        progress(data.percentage)
     }
     localStorage.setItem('DATA', JSON.stringify(data))
 }
@@ -230,7 +261,6 @@ const deleteItemFromData = (id, type) => {
         return el.id !== id
     })
 }
-
 
 //Delete values from datastructure
 const deleteValueFromData = (id, type) => {
@@ -275,6 +305,15 @@ function setUpEventListeners() {
 }
 
 
+//Progressbar shows percentage of budget available
+const bar = document.getElementById('progress')
+const progress = (percentage) => {
+    document.querySelector('.percentage').innerText = percentage + '%'
+    bar.style.width = percentage + '%'
+    percentage < 20 ? bar.style.backgroundColor = 'red': bar.style.backgroundColor = 'green';
+}
+
+
 //Initial state, get data from localStorage, if any, and set eventListeners
 function init() {
 
@@ -294,14 +333,16 @@ function init() {
             addScrollSign()
             calcTotals(type)
             displayTotals()
+            calcPercentages()
+            progress(data.percentage)
         })
     }
 
-    if (!data) {
+    if (!data || data.budget === 0) {
         document.querySelector('.smile_sad').innerHTML =
             '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
     }
-
+    date()
     setUpEventListeners()
     console.log(data)
 }

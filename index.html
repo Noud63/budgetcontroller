@@ -13,7 +13,8 @@
 
     <div class="wrapper">
 
-        <div class="account">- Budget Controller -</div>
+        <div class="account">- BUDGET CONTROLLER -</div>
+        <div class="date"></div>
         <div class="menu">
             <div class="payments">Current Account</div>
             <div class="savings">Savings</div>
@@ -49,23 +50,44 @@
         <div class="container">
             <div class="plusBox">
                 <div class="plus"><span>Deposits</span><span class="depTotal">&euro; 0.00</span></div>
-                <div class="pluscontainer delete"></div>
+                <div class="pluscontainer delete">
+                    <div class="overlay">
+                        <div class="removeQuestion"><span>do you want to remove</span></div>
+                        <div class="overlayBtns">
+                            <div class="cancelBtn">cancel</div>
+                            <div class="removeBtn">remove</div>
+                        </div>
+                    </div>
+                </div>
+               
             </div>
 
             <div class="minusBox">
                 <div class="minus"><span>Withdrawals</span><span class="withTotal">&euro; 0.00</span></div>
-                <div class="minuscontainer delete"></div>
+                <div class="minuscontainer delete">
+                    <div class="overlay">
+                        <div class="removeQuestion"><span>do you want to remove</span></div>
+                        <div class="overlayBtns">
+                            <div class="cancelBtn">cancel</div>
+                            <div class="removeBtn">remove</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="overlay">
-                <div class="removeQuestion">do you want to remove</div>
-                <button type="button" class="removeBtn">remove</button>
-            </div>
         </div>
 
         <div class="scrollSigns">
             <div class="scrollSignLeft scrollBtn"></div>
             <div class="scrollSignRight scrollBtn"></div>
+        </div>
+
+        <div class="hundred"><span>Available budget&nbsp;</span>
+            <span class="percentage">0%</span>
+            <span>&nbsp;of total deposits</span>
+        </div>
+        <div id="progressbar">
+            <div id= "progress"></div>
         </div>
 
     </div>
