@@ -16,8 +16,7 @@ let data = {
         plus: [],  // Array of deposit objects
         minus: []  // Array of withdrawal objects
     },
-    percentage: 0,
-    percentage2: 0
+    percentage: 0
 }
 
 
@@ -69,16 +68,16 @@ const calcTotals = (type) => {
 const calcPercentages = () => {
     let percentage = parseInt(data.budget / data.totals.plus * 100)
 
-    if(data.budget === 0){
-       percentage = 0
-    }
-    if(data.totals.plus === data.budget){
-        percentage = 100;
-    }
-    if (data.totals.plus === 0 && data.budget === 0){
+    if (data.budget === 0) {
         percentage = 0
     }
-    if(data.budget < 0 ){
+    if (data.totals.plus === data.budget) {
+        percentage = 100;
+    }
+    if (data.totals.plus === 0 && data.budget === 0) {
+        percentage = 0
+    }
+    if (data.budget < 0) {
         percentage = 0
     }
     data.percentage = percentage
@@ -104,12 +103,12 @@ const displayBudget = (budget) => {
     let element = document.querySelector('.budgetTotal')
     element.innerHTML = `<div class="saldo">${sign} &euro; ${budget.toFixed(2)}</div>`
 
-
     //Change default background-color to red when budget is negative
-    sign === '-' ? document.querySelector('.budget').classList.add('red') : document.querySelector('.budget').classList.remove('red')
-    sign === '-' ? document.querySelector('.smile_sad').innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' :
-        document.querySelector('.smile_sad').innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
-
+    const budgetRedGreen = document.querySelector('.budget')
+    const emoji = document.querySelector('.smile_sad')
+    sign === '-' ? budgetRedGreen.classList.add('red') : budgetRedGreen.classList.remove('red');
+    sign === '-' ? emoji.innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' :
+        emoji.innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
 }
 
 
@@ -149,9 +148,9 @@ function getTimeStamp() {
 //Day today
 const date = () => {
     var now = new Date();
-    var options = { month: "long", weekday: "long", day: "numeric"}
+    var options = { month: "long", weekday: "long", day: "numeric" }
     var newTime = now.toLocaleDateString("en-EN", options)
-    let today = newTime 
+    let today = newTime
     document.querySelector('.date').textContent = today
 }
 
@@ -187,17 +186,15 @@ const displayObject = (obj, type) => {
 
 
 //Down arrow appears at bottom of list items if list length exceeds 7
+const arrowDownLeft = document.querySelector('.scrollSignLeft')
+const arrowDownRight = document.querySelector('.scrollSignRight')
 const addScrollSign = () => {
-    if (data.items.plus.length >= 7) {
-        document.querySelector('.scrollSignLeft').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
-    } else {
-        document.querySelector('.scrollSignLeft').innerHTML = ""
-    }
-    if (data.items.minus.length >= 7) {
-        document.querySelector('.scrollSignRight').innerHTML = '<img src="scroll.png" style="width: 60px;" >'
-    } else {
-        document.querySelector('.scrollSignRight').innerHTML = ""
-    }
+    data.items.plus.length >= 7 ? arrowDownLeft.style.display = "flex" :
+        arrowDownLeft.style.display = "none"
+
+    data.items.minus.length >= 7 ? arrowDownRight.style.display = "flex" :
+        arrowDownRight.style.display = "none"
+
 }
 
 
@@ -227,11 +224,11 @@ const parseData = () => {
         displayTotals()
         calcPercentages()
         progress(data.percentage)
-        
+        addScrollSign()
     } else {
         alert('Fill out input fields with required data!')
     }
-    addScrollSign()
+
     clearAllFields()
     localStorage.setItem('DATA', JSON.stringify(data))
 }
@@ -245,11 +242,11 @@ const deleteItem = (e) => {
     let type = ID[0]
     ID = parseFloat(ID[1])
 
+    console.log(item.children[0].firstChild.nodeValue)
+
     if (e.target.className === 'remove') {
         item.remove()
         updateAllValues(ID, type)
-        calcPercentages()
-        progress(data.percentage)
     }
     localStorage.setItem('DATA', JSON.stringify(data))
 }
@@ -261,6 +258,7 @@ const deleteItemFromData = (id, type) => {
         return el.id !== id
     })
 }
+
 
 //Delete values from datastructure
 const deleteValueFromData = (id, type) => {
@@ -282,6 +280,19 @@ const updateAllValues = (ID, type) => {
     calcTotals(type)
     displayTotals()
     addScrollSign()
+    calcPercentages()
+    progress(data.percentage)
+}
+
+
+//Progressbar shows percentage of budget available
+const bar = document.getElementById('progress')
+const perc = document.querySelector('.percentage')
+const progress = (percentage) => {
+    perc.textContent = percentage + '%'
+    bar.style.width = percentage + '%'
+    percentage < 20 ? (bar.style.backgroundColor = 'darkred', perc.style.backgroundColor = 'darkred') :
+        (bar.style.backgroundColor = 'green', perc.style.backgroundColor = 'green')
 }
 
 
@@ -305,17 +316,6 @@ function setUpEventListeners() {
 }
 
 
-//Progressbar shows percentage of budget available
-const bar = document.getElementById('progress')
-const perc = document.querySelector('.percentage')
-const progress = (percentage) => {
-    perc.innerText = percentage + '%'
-    bar.style.width = percentage + '%'
-    percentage < 20 ? (bar.style.backgroundColor = 'red', perc.style.backgroundColor = 'darkred') : 
-        (bar.style.backgroundColor = 'green', perc.style.backgroundColor = 'green')
-}
-
-
 //Initial state, get data from localStorage, if any, and set eventListeners
 function init() {
 
@@ -326,9 +326,7 @@ function init() {
             let obj = el
             let type = el.type
             let value = el.value
-            let id = el.id
-            let created = el.created
-            displayObject(obj, type, id, created)
+            displayObject(obj, type)
             calculateBudget()
             displayBudget(data.budget)
             storeValues(type, value)
