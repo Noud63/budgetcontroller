@@ -1,4 +1,5 @@
-* { box-sizing: border-box;
+* { 
+    box-sizing: border-box;
 }
 
 body {
@@ -9,6 +10,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 
 .wrapper {
@@ -16,7 +20,7 @@ body {
     align-items: center;
     justify-content:center;
     flex-direction: column;
-    margin: 50px  auto;
+    margin: 50px 20px 30px 20px; 
     max-width: 600px;
     background-color: rgb(46, 46, 46, .7);
     padding: 30px 50px 20px 50px;
@@ -36,9 +40,18 @@ body {
 }
 
 .menu {
+    position: relative;
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
+    margin-top: 10px;
+}
+
+.euro {
+    font-size: 0;
+    position: absolute;
 }
 
 .payments{
@@ -47,7 +60,7 @@ body {
     justify-content:center;
     width: 50%;
     padding: 10px 0 10px 0;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(94, 94, 94);
     color:rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.2s ease-in-out;
@@ -63,17 +76,6 @@ body {
     color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.2s ease-in-out;
-}
-
-
-.payments:hover{
-    background-color: rgb(141, 141, 141);
-    color: black;
-}
-
-.savings:hover{
-   background-color: rgb(141, 141, 141);
-    color: black;
 }
 
 .account {
@@ -199,7 +201,7 @@ body {
     width: 100%;
     margin-bottom: 20px;
     background: rgb(47, 122, 44); 
-    padding: 20px 23px 20px 20px;
+    padding: 15px 23px 15px 20px;
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: .8s ease-in-out;
@@ -219,7 +221,6 @@ body {
     justify-content: center;
     flex-direction: column;
     margin-top: 100px;
-    margin-left: 31%;
     font-size: 1.4rem;
 }
 
@@ -235,6 +236,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -254,15 +256,43 @@ body {
     margin-left: 10px;
 }
 
+.scrollSigns {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+}
 
-@media only screen and (max-width: 520px) {
+.scrollSignLeft {
+    width: 50%;
+     height: 50px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollSignRight {
+    width: 50%;
+     height: 50px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media only screen and (max-width: 535px) {
   .container {
      flex-direction: column;
       height: 800px;
      width: 100%;
      overflow: scroll;
+     align-items: center;
   }
-
+  .flatBroke {
+    margin-top: 0px;
+}
   .container::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
@@ -305,21 +335,37 @@ body {
 .btn2 {
     display: flex;
 }
+.scrollSigns{
+        display: none;
+    }
 
 }
 
-@media only screen and (max-width: 730px) {
+@media only screen and (max-width: 430px) {
+  .account {
+      font-size: 1.2rem;
+  }
+}
+
+ /* @media only screen and (max-width: 730px) {
     .wrapper {
-         padding: 20px 20px 30px 20px;
-         margin: 0 auto;
-         border: 0;
+         padding: 20px 20px 30px 20px; 
+    }
+   
+}  */
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        padding: 20px 20px 30px 20px; 
+         /* margin: 0;
+         border: 0; */
     }
    
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
     .wrapper {
-         padding: 20px 20px 30px 20px;
+        padding: 20px 20px 30px 20px; 
          margin: 0;
          border: 0;
     }
@@ -431,37 +477,16 @@ body {
     color: rgb(128, 128, 128);
 }
 
-.scrollSigns {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-}
-
-.scrollSignLeft {
-    width: 50%;
-     height: 50px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.scrollSignRight {
-    width: 50%;
-     height: 50px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-@media only screen and (max-width: 520px) {
-    .scrollSigns {
+/* @media only screen and (max-width: 535px) {
+    .scrollSignLeft{
+        display: none;
+    }
+    .scrollSignRight{
         display: none;
     }
    
-}
+   
+} */
 
 .scrollPng {
     width: 100%;
@@ -549,8 +574,7 @@ body {
 }
 
 .hundred{
-    margin: 25px 0 15px 0;
-    padding-left: 5px;
+    margin: 15px 0 15px 0;
      display: flex;
     align-items: center;
     justify-content: center;

@@ -107,8 +107,8 @@ const displayBudget = (budget) => {
     const budgetRedGreen = document.querySelector('.budget')
     const emoji = document.querySelector('.smile_sad')
     sign === '-' ? budgetRedGreen.classList.add('red') : budgetRedGreen.classList.remove('red');
-    sign === '-' ? emoji.innerHTML = '<img src="sad.png" alt="smile" style="width: 28px;" class="smile"/>' :
-        emoji.innerHTML = '<img src="smile.png" alt="smile" style="width: 28px;" class="smile"/>'
+    sign === '-' ? emoji.innerHTML = '<img src="sad1.png" alt="smile" style="width: 20px;" class="smile"/>' :
+        emoji.innerHTML = '<img src="smile2.png" alt="smile" style="width: 20px;" class="smile"/>'
 }
 
 
@@ -190,13 +190,13 @@ const displayObject = (obj, type) => {
 //Down arrow appears at bottom of list items if list length exceeds 7
 const arrowDownLeft = document.querySelector('.scrollSignLeft')
 const arrowDownRight = document.querySelector('.scrollSignRight')
+const arrows = document.querySelector('.scrollSigns')
 const addScrollSign = () => {
     data.items.plus.length >= 7 ? arrowDownLeft.style.display = "flex" :
         arrowDownLeft.style.display = "none"
 
     data.items.minus.length >= 7 ? arrowDownRight.style.display = "flex" :
-        arrowDownRight.style.display = "none"
-
+        arrowDownRight.style.display = "none" 
 }
 
 
