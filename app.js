@@ -140,7 +140,9 @@ function getTimeStamp() {
     if (hour < 10) {
         hour = '0' + hour
     }
-    let created = year + "-" + month + '-' + day + ' ' + hour + ':' + minute + 'h';
+
+    let created = `${year}-${month}-${day} ${hour}:${minute}h`
+
     return created;
 }
 
@@ -241,8 +243,6 @@ const deleteItem = (e) => {
     ID = ID.split('-')
     let type = ID[0]
     ID = parseFloat(ID[1])
-
-    console.log(item.children[0].firstChild.nodeValue)
 
     if (e.target.className === 'remove') {
         item.remove()

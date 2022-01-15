@@ -12,6 +12,10 @@ body {
 }
 
 .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
     margin: 50px  auto;
     max-width: 600px;
     background-color: rgb(46, 46, 46, .7);
@@ -207,6 +211,21 @@ body {
 
 .red {
      background: rgb(134, 0, 0);
+}
+
+.flatBroke {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 31%;
+    font-size: 1.4rem;
+}
+
+.nosavings {
+    margin-top: 20px;
+    padding-left: 18px;
 }
 
 .container {
