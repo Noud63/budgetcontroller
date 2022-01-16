@@ -1,7 +1,9 @@
 
 // Current Account and Savings buttons eventListeners
+
 const accountBtns = [...document.querySelectorAll('.accountBtn')]
 const boxes = [...document.querySelectorAll('.box')]
+
 accountBtns.forEach( btn => {
     btn.addEventListener('click', function(e){
   if(e.target.classList.contains('savings')){

@@ -29,6 +29,9 @@ body {
     border-radius: 10px;
 }
 
+
+/****************************** TOP *****************************/
+
 .date {
     width: 100%;
     display: flex;
@@ -87,27 +90,6 @@ body {
     padding-bottom: 5px;
     font-size: 1.4rem;
     letter-spacing: 2px;
-}
-
-.categories {
-    width: 100%;
-    height: 40px;
-}
-
-.select_cat {
-    outline: none;
-     border: 0;
-    width: 100%;
-    height: 40px;
-    color: rgb(146, 146, 146);
-    font-size: 1rem;
-    padding-left: 10px;
-}
-
-.selected {
-     color: rgb(161, 0, 0);
-    font-size: 1rem;
-    padding-left: 10px;
 }
 
 .fields {
@@ -215,6 +197,10 @@ body {
      background: rgb(134, 0, 0);
 }
 
+
+/***************************** BODY *****************************/
+
+
 .flatBroke {
     display: none;
     align-items: center;
@@ -281,96 +267,6 @@ body {
     justify-content: center;
 }
 
-
-@media only screen and (max-width: 535px) {
-  .container {
-     flex-direction: column;
-      height: 800px;
-     width: 100%;
-     overflow: scroll;
-     align-items: center;
-  }
-  .flatBroke {
-    margin-top: 0px;
-}
-  .container::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-}
-
-  .pluscontainer, .minuscontainer {
-      height: auto;
-  }
-.plusBox {
-    margin-right: 0;
-}
-.minusBox {
-    margin-left: 0;
-    margin-top: 10px;
-}
-.add_description {
-     font-size: .8rem;
-}
-
-.add_value {
-    font-size: .8rem;
-}
-
-.description {
-   width: 65%
-}
-
-.plusmin {
-  width: 15%;
-}
-
-.value {
-    width: 20%;
-}
-
-.btn1 {
-     display: none;
-}
-
-.btn2 {
-    display: flex;
-}
-.scrollSigns{
-        display: none;
-    }
-
-}
-
-@media only screen and (max-width: 430px) {
-  .account {
-      font-size: 1.2rem;
-  }
-}
-
- /* @media only screen and (max-width: 730px) {
-    .wrapper {
-         padding: 20px 20px 30px 20px; 
-    }
-   
-}  */
-
-@media only screen and (max-width: 600px) {
-    .wrapper {
-        padding: 20px 20px 30px 20px; 
-         /* margin: 0;
-         border: 0; */
-    }
-   
-}
-
-@media only screen and (max-width: 420px) {
-    .wrapper {
-        padding: 20px 20px 30px 20px; 
-         margin: 0;
-         border: 0;
-    }
-   
-}
 
 .plusBox, .minusBox  {
     width: 100%;
@@ -473,20 +369,9 @@ body {
 }
 
 .created {
-     width: 62%;
+    width: 62%;
     color: rgb(128, 128, 128);
 }
-
-/* @media only screen and (max-width: 535px) {
-    .scrollSignLeft{
-        display: none;
-    }
-    .scrollSignRight{
-        display: none;
-    }
-   
-   
-} */
 
 .scrollPng {
     width: 100%;
@@ -503,49 +388,6 @@ body {
     flex-direction: column;
     width: 100%;
     height: 500px;
-}
-
-.removeQuestion {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 200px;
-    height: 80px;
-    color: red;
-    background-color: white;
-    padding: 10px;
-}
-
-.removeBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 30px;
-    outline: none;
-    border-style: none;
-    background-color: rgb(202, 0, 0);
-    color: white;
-}
-
-.cancelBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 30px;
-    outline: none;
-    border-style: none;
-    background-color: rgb(202, 0, 0);
-    color: white;
-}
-
-.overlayBtns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
 }
 
 .percentage {
@@ -579,4 +421,91 @@ body {
     align-items: center;
     justify-content: center;
     background-color: transparent;
+}
+
+
+/************************** MEDIA QUERIES ****************************/
+
+
+@media only screen and (max-width: 535px) {
+.container {
+    display: block;
+    flex-direction: column;
+    height: 800px;
+    width: 100%;
+    overflow: scroll;
+    align-items: center;
+  }
+
+  .container::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.pluscontainer, .minuscontainer {
+      height: auto;
+  }
+
+.plusBox {
+    margin-right: 0;
+}
+
+.minusBox {
+    margin-left: 0;
+    margin-top: 10px;
+}
+.add_description {
+    font-size: .8rem;
+}
+
+.add_value {
+    font-size: .8rem;
+}
+
+.description {
+    width: 65%
+}
+
+.plusmin {
+    width: 15%;
+}
+
+.value {
+    width: 20%;
+}
+
+.btn1 {
+    display: none;
+}
+
+.btn2 {
+    display: flex;
+}
+.scrollSigns{
+    display: none;
+    }
+
+}
+
+
+@media only screen and (max-width: 430px) {
+  .account {
+      font-size: 1.2rem;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        padding: 20px 20px 30px 20px; 
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    .wrapper {
+        padding: 20px 20px 30px 20px; 
+         margin: 0;
+         border: 0;
+    }
 }
