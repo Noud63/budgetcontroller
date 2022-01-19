@@ -195,7 +195,7 @@ const addScrollSign = () => {
         arrowDownLeft.style.display = "none"
 
     data.items.minus.length >= 7 ? arrowDownRight.style.display = "flex" :
-        arrowDownRight.style.display = "none" 
+        arrowDownRight.style.display = "none"
 }
 
 
@@ -315,6 +315,31 @@ function setUpEventListeners() {
 }
 
 
+// EventListeners for current account and savings button
+const accountBtns = [...document.querySelectorAll('.accountBtn')]
+const boxes = [...document.querySelectorAll('.box')]
+
+accountBtns.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        if (e.target.classList.contains('savings')) {
+            boxes.forEach(box => {
+                box.style.display = 'none'
+            })
+
+            document.querySelector('.container').style.height = '570px'
+            document.querySelector('.flatBroke').style.display = 'flex'
+
+        } else if (e.target.classList.contains('payments')) {
+            boxes.forEach(box => {
+                box.style.display = 'flex'
+            })
+            document.querySelector('.container').style.height = '500px'
+            document.querySelector('.flatBroke').style.display = 'none'
+        }
+    })
+})
+
+
 //Initial state, get data from localStorage, if any, and set eventListeners
 function init() {
 
@@ -347,5 +372,3 @@ function init() {
 }
 
 init()
-
-
