@@ -20,18 +20,6 @@ let data = {
 }
 
 
-//Get input values when submit button is clicked
-const getInput = () => {
-    return {
-        type: document.querySelector('.select_type').value,
-        description: document.querySelector('.add_description').value,
-        value: parseFloat(document.querySelector('.add_value').value),
-        id: Date.now() + Math.random(),
-        created: getTimeStamp()
-    }
-}
-
-
 //Store values in datastructure
 const storeValues = (type, value) => {
     data[type].push(value)
@@ -84,6 +72,18 @@ const calcPercentages = () => {
 }
 
 
+//Get input values when submit button is clicked
+const getInput = () => {
+    return {
+        type: document.querySelector('.select_type').value,
+        description: document.querySelector('.add_description').value,
+        value: parseFloat(document.querySelector('.add_value').value),
+        id: Date.now() + Math.random(),
+        created: getTimeStamp()
+    }
+}
+
+
 //Display totals at top of list
 const displayTotals = () => {
     document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
@@ -109,13 +109,6 @@ const displayBudget = (budget) => {
     sign === '-' ? budgetRedGreen.classList.add('red') : budgetRedGreen.classList.remove('red');
     sign === '-' ? emoji.innerHTML = '<img src="images/sad1.png" alt="smile" style="width: 20px;" class="smile"/>' :
         emoji.innerHTML = '<img src="images/smile2.png" alt="smile" style="width: 20px;" class="smile"/>'
-}
-
-
-// Clear all fields on clicking submit button
-const clearAllFields = () => {
-    document.querySelector('.add_description').value = ""
-    document.querySelector('.add_value').value = ""
 }
 
 
@@ -145,17 +138,6 @@ function getTimeStamp() {
 
     return created;
 }
-
-
-//Day today
-const date = () => {
-    var now = new Date();
-    var options = { month: "long", weekday: "long", day: "numeric" }
-    var newTime = now.toLocaleDateString("en-EN", options)
-    let today = newTime
-    document.querySelector('.date').textContent = today
-}
-
 
 //Show item in list container
 const displayObject = (obj, type) => {
@@ -210,10 +192,16 @@ const halveItemsList = (type) => {
 }
 
 
+// Clear all fields on clicking submit button
+const clearAllFields = () => {
+    document.querySelector('.add_description').value = ""
+    document.querySelector('.add_value').value = ""
+}
+
+
 //Render UI, calculate budget, store values in datastructure
 const parseData = () => {
-
-    const inputData = getInput()
+        const inputData = getInput()
 
     if (inputData.description !== "" && !isNaN(inputData.value)) {
         displayObject(inputData, inputData.type)
@@ -235,7 +223,7 @@ const parseData = () => {
 }
 
 
-//Delete list item from UI
+//Delete list item from UI and update app
 const deleteItem = (e) => {
     let item = e.target.parentNode.parentNode;
     let ID = e.target.parentNode.parentNode.id;
@@ -281,6 +269,16 @@ const updateAllValues = (ID, type) => {
     addScrollSign()
     calcPercentages()
     progress(data.percentage)
+}
+
+
+//Day today
+const date = () => {
+    var now = new Date();
+    var options = { month: "long", weekday: "long", day: "numeric" }
+    var newTime = now.toLocaleDateString("en-EN", options)
+    let today = newTime
+    document.querySelector('.date').textContent = today
 }
 
 
