@@ -101,7 +101,7 @@ body {
 
 .plusmin {
     width: 15%;
-    height: 42px;
+    height: 44px;
 }
 
 .plusmin select {
@@ -113,7 +113,11 @@ body {
 
 .select_type {
      outline: none;
-     border: 0;
+     border: 1px solid #929292;
+}
+
+.red-focus{
+  border: 1px solid #ff5049 !important;
 }
 
 ::placeholder {
@@ -124,7 +128,7 @@ body {
 .description {
     width:55%;
     display: flex;
-    border-left: 1px solid gray;
+    border: 1px solid #929292
 }
 
 .add_description {
@@ -139,6 +143,8 @@ body {
 .value {
     width: 15%;
     border-left: 1px solid gray;
+    height: 44px;
+    border: 1px solid #929292
 }
 
 .add_value  {

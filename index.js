@@ -3,8 +3,11 @@
 
 // ------------------------------- BUDGET CONTROLLER APP ------------------------------ //
 
+import { getTimeStamp, date } from './dates.js'
+import { changeBorderColor, progress, halveItemsList, displayDownArrow } from './additions.js'
+
 // datastructure
-let data = {
+export let data = {
     plus: [],      // Deposit values
     minus: [],     // Withdrawal values
     budget: 0,
@@ -17,12 +20,6 @@ let data = {
         minus: []  // Array of withdrawal objects
     },
     percentage: 0
-}
-
-
-//Store values in datastructure
-const storeValues = (type, value) => {
-    data[type].push(value)
 }
 
 
@@ -53,7 +50,7 @@ const calcTotals = (type) => {
 
 
 //Calculate percentages for progressbar
-const calcPercentages = () => {
+const calcPercentage = () => {
     let percentage = parseInt(data.budget / data.totals.plus * 100)
 
     if (data.budget === 0) {
@@ -72,6 +69,20 @@ const calcPercentages = () => {
 }
 
 
+//Get totals from 
+const getTotals = () => {
+     return {
+         totalPlus: data.totals.plus,
+         totalMinus: data.totals.minus
+     }
+}
+
+//Store values in datastructure
+const storeValues = (type, value) => {
+    data[type].push(value)
+}
+
+
 //Get input values when submit button is clicked
 const getInput = () => {
     return {
@@ -86,8 +97,9 @@ const getInput = () => {
 
 //Display totals at top of list
 const displayTotals = () => {
-    document.querySelector('.depTotal').innerHTML = '&euro;' + " " + data.totals.plus.toFixed(2)
-    document.querySelector('.withTotal').innerHTML = '&euro;' + " " + data.totals.minus.toFixed(2)
+    let totals = getTotals()
+    document.querySelector('.depTotal').innerHTML = '&euro;' + " " + totals.totalPlus.toFixed(2)
+    document.querySelector('.withTotal').innerHTML = '&euro;' + " " + totals.totalMinus.toFixed(2)
 }
 
 
@@ -111,33 +123,6 @@ const displayBudget = (budget) => {
         emoji.innerHTML = '<img src="images/smile2.png" alt="smile" style="width: 20px;" class="smile"/>'
 }
 
-
-// Add timestamp to each listitem
-function getTimeStamp() {
-    let time = new Date();
-    let day = time.getDate();
-    let month = time.getMonth() + 1;
-    let year = time.getFullYear();
-    let hour = time.getHours();
-    let minute = time.getMinutes();
-
-    if (day < 10) {
-        day = '0' + day
-    }
-    if (month < 10) {
-        month = '0' + month
-    }
-    if (minute < 10) {
-        minute = '0' + minute
-    }
-    if (hour < 10) {
-        hour = '0' + hour
-    }
-
-    let created = `${year}-${month}-${day} ${hour}:${minute}h`
-
-    return created;
-}
 
 //Show item in list container
 const displayObject = (obj, type) => {
@@ -169,29 +154,6 @@ const displayObject = (obj, type) => {
 }
 
 
-//Down arrow appears at bottom of list items if list length exceeds 7
-const arrowDownLeft = document.querySelector('.scrollSignLeft')
-const arrowDownRight = document.querySelector('.scrollSignRight')
-const addScrollSign = () => {
-    data.items.plus.length >= 7 ? arrowDownLeft.style.display = "flex" :
-        arrowDownLeft.style.display = "none"
-
-    data.items.minus.length >= 7 ? arrowDownRight.style.display = "flex" :
-        arrowDownRight.style.display = "none"
-}
-
-
-//If deposit or withdrawal list is longer then 100, half of the list will be deleted at page refresh or page reload
-const halveItemsList = (type) => {
-    let half = Math.ceil(data.items[type].length) / 2
-
-    if (data.items[type].length > 100) {
-        data.items[type].splice(0, half)
-    }
-    localStorage.setItem('DATA', JSON.stringify(data))
-}
-
-
 // Clear all fields on clicking submit button
 const clearAllFields = () => {
     document.querySelector('.add_description').value = ""
@@ -200,8 +162,8 @@ const clearAllFields = () => {
 
 
 //Render UI, calculate budget, store values in datastructure
-const parseData = () => {
-        const inputData = getInput()
+const addItem = () => {
+    const inputData = getInput()
 
     if (inputData.description !== "" && !isNaN(inputData.value)) {
         displayObject(inputData, inputData.type)
@@ -211,9 +173,9 @@ const parseData = () => {
         halveItemsList(inputData.type)
         calcTotals(inputData.type)
         displayTotals()
-        calcPercentages()
+        calcPercentage()
         progress(data.percentage)
-        addScrollSign()
+        displayDownArrow()
     } else {
         alert('Fill out input fields with required data!')
     }
@@ -233,8 +195,9 @@ const deleteItem = (e) => {
 
     if (e.target.className === 'remove') {
         item.remove()
-        updateAllValues(ID, type)
+        deleteAndUpdate(ID, type)
     }
+
     localStorage.setItem('DATA', JSON.stringify(data))
 }
 
@@ -259,37 +222,16 @@ const deleteValueFromData = (id, type) => {
 
 
 //Update all values when item has been deleted
-const updateAllValues = (ID, type) => {
+const deleteAndUpdate = (ID, type) => {
     deleteValueFromData(ID, type)
     deleteItemFromData(ID, type)
     calculateBudget()
     displayBudget(data.budget)
     calcTotals(type)
     displayTotals()
-    addScrollSign()
-    calcPercentages()
+    displayDownArrow()
+    calcPercentage()
     progress(data.percentage)
-}
-
-
-//Day today
-const date = () => {
-    var now = new Date();
-    var options = { month: "long", weekday: "long", day: "numeric" }
-    var newTime = now.toLocaleDateString("en-EN", options)
-    let today = newTime
-    document.querySelector('.date').textContent = today
-}
-
-
-//Progressbar shows percentage of budget available
-const bar = document.getElementById('progress')
-const perc = document.querySelector('.percentage')
-const progress = (percentage) => {
-    perc.textContent = percentage + '%'
-    bar.style.width = percentage + '%'
-    percentage < 20 ? (bar.style.backgroundColor = 'darkred', perc.style.backgroundColor = 'darkred') :
-        (bar.style.backgroundColor = 'green', perc.style.backgroundColor = 'green')
 }
 
 
@@ -297,7 +239,7 @@ const progress = (percentage) => {
 function setUpEventListeners() {
     const btns = [...document.querySelectorAll('.btn')]
     btns.forEach(btn => {
-        btn.addEventListener('click', parseData)
+        btn.addEventListener('click', addItem)
     })
 
     const deleteBtns = document.querySelectorAll('.delete')
@@ -305,37 +247,15 @@ function setUpEventListeners() {
         btn.addEventListener('click', deleteItem)
     })
 
+    const select = document.querySelector('.select_type')
+    select.addEventListener('change', changeBorderColor)
+
     document.addEventListener("keypress", function (event) {
         if (event.keyCode === 13) {
             parseData();
         }
     });
 }
-
-
-// EventListeners for current account and savings button
-const accountBtns = [...document.querySelectorAll('.accountBtn')]
-const boxes = [...document.querySelectorAll('.box')]
-
-accountBtns.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        if (e.target.classList.contains('savings')) {
-            boxes.forEach(box => {
-                box.style.display = 'none'
-            })
-
-            document.querySelector('.container').style.height = '570px'
-            document.querySelector('.flatBroke').style.display = 'flex'
-
-        } else if (e.target.classList.contains('payments')) {
-            boxes.forEach(box => {
-                box.style.display = 'flex'
-            })
-            document.querySelector('.container').style.height = '500px'
-            document.querySelector('.flatBroke').style.display = 'none'
-        }
-    })
-})
 
 
 //Initial state, get data from localStorage, if any, and set eventListeners
@@ -352,10 +272,10 @@ function init() {
             calculateBudget()
             displayBudget(data.budget)
             storeValues(type, value)
-            addScrollSign()
+            displayDownArrow()
             calcTotals(type)
             displayTotals()
-            calcPercentages()
+            calcPercentage()
             progress(data.percentage)
         })
     }
@@ -364,9 +284,11 @@ function init() {
         document.querySelector('.smile_sad').innerHTML =
             '<img src="images/smile2.png" alt="smile" style="width: 28px;" class="smile"/>'
     }
+    
     date()
     setUpEventListeners()
     console.log(data)
 }
 
 init()
+
