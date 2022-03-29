@@ -295,10 +295,11 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-     padding: 10px 0 10px 0;
-     border-bottom: 2px solid rgb(126, 126, 126);
+     padding: 10px ;
+     border: 2px solid rgb(126, 126, 126);
      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
      font-size: 1rem;
+     /* background-color: rgb(145, 145, 145); */
 }
 
 .pluscontainer::-webkit-scrollbar {
@@ -454,6 +455,7 @@ body {
 
 .plusBox {
     margin-right: 0;
+    margin-bottom: 30px;
 }
 
 .minusBox {
