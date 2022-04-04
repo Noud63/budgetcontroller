@@ -1,5 +1,6 @@
 * { 
     box-sizing: border-box;
+    margin: 0;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
     flex-direction: column;
     margin: 50px 20px 30px 20px; 
     max-width: 600px;
+    height: 950px;
     background-color: rgb(46, 46, 46, .7);
     padding: 30px 50px 20px 50px;
     border: 3px solid rgb(82, 82, 82);
@@ -187,9 +189,26 @@ body {
     flex-direction: row;
     margin: 0 auto;
     width: 100%;
+    height: 60px;
     margin-bottom: 20px;
     background: rgb(47, 122, 44); 
     padding: 15px 23px 15px 20px;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: .8s ease-in-out;
+}
+
+.savingsBox {
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 20px;
+    background: rgb(47, 122, 44); 
+    padding: 15px 0px 15px 0px;
+    height: 62px;
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: .8s ease-in-out;
@@ -212,7 +231,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 100px;
     font-size: 1.4rem;
 }
 
@@ -224,20 +242,29 @@ body {
 .container {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .pluscontainer, .minuscontainer {
     width: 100%;
-    height: 480px;
+    height:600px;
     display: flex;
     flex-direction: column;
     overflow: scroll;
+}
+
+.plusBox, .minusBox  {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 500px;
 }
 
 .plusBox {
@@ -274,14 +301,6 @@ body {
 }
 
 
-.plusBox, .minusBox  {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .depTotal {
  color: rgb(0, 173, 0);
 }
@@ -299,7 +318,6 @@ body {
      border: 2px solid rgb(126, 126, 126);
      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
      font-size: 1rem;
-     /* background-color: rgb(145, 145, 145); */
 }
 
 .pluscontainer::-webkit-scrollbar {
@@ -432,21 +450,30 @@ body {
 
 
 /************************** MEDIA QUERIES ****************************/
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        padding: 20px 20px 30px 20px; 
+    }
+}
 
 
 @media only screen and (max-width: 535px) {
 .container {
-    display: block;
+    display: flex;
     flex-direction: column;
-    height: 800px;
     width: 100%;
     overflow: scroll;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .container::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
+}
+
+.flatBroke {
+    margin-top: 80px;
 }
 
 .pluscontainer, .minuscontainer {
@@ -455,12 +482,15 @@ body {
 
 .plusBox {
     margin-right: 0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    height: auto;
 }
 
 .minusBox {
     margin-left: 0;
     margin-top: 10px;
+    height: auto;
+   
 }
 .add_description {
     font-size: .8rem;
@@ -492,7 +522,6 @@ body {
 .scrollSigns{
     display: none;
     }
-
 }
 
 
@@ -500,20 +529,10 @@ body {
   .account {
       font-size: 1.2rem;
   }
-}
-
-
-@media only screen and (max-width: 600px) {
-    .wrapper {
-        padding: 20px 20px 30px 20px; 
-    }
-}
-
-
-@media only screen and (max-width: 420px) {
-    .wrapper {
-        padding: 20px 20px 30px 20px; 
-         margin: 0;
-         border: 0;
+  .wrapper {
+     padding: 20px 10px 30px 10px; 
+        width: 100%;
+        margin: 0;
+        border: 0;
     }
 }

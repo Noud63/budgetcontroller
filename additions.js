@@ -52,13 +52,17 @@ accountBtns.forEach(btn => {
         boxes.forEach(box => {
             if (e.target.classList.contains('savings')) {
                 box.style.display = 'none'
-                document.querySelector('.container').style.height = '570px'
+                // document.querySelector('.container').style.height = '570px'
                 document.querySelector('.flatBroke').style.display = 'flex'
+                document.querySelector('.savingsBox').style.display = 'flex'
+                document.querySelector('.budget').style.display = 'none'
 
             } else if (e.target.classList.contains('payments')) {
                 box.style.display = 'flex'
-                document.querySelector('.container').style.height = '500px'
+                // document.querySelector('.container').style.height = '500px'
                 document.querySelector('.flatBroke').style.display = 'none'
+                document.querySelector('.savingsBox').style.display = 'none'
+                document.querySelector('.budget').style.display = 'flex'
             }
         })
     })
