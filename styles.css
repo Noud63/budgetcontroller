@@ -21,13 +21,13 @@ body {
     align-items: center;
     justify-content:center;
     flex-direction: column;
-    margin: 50px 20px 30px 20px; 
+    margin: 60px 20px 30px 20px; 
     max-width: 600px;
     height: 950px;
-    background-color: rgb(46, 46, 46, .7);
+    background-color: rgba(19, 32, 20, 0.7);
     padding: 30px 50px 20px 50px;
-    border: 3px solid rgb(82, 82, 82);
-    box-shadow:  0px 0px 18px black;
+    border: 3px solid rgb(51, 68, 52);
+    box-shadow:  0px 0px 38px black,  0px 0px 28px black;
     border-radius: 10px;
 }
 
@@ -69,6 +69,7 @@ body {
     color:rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    font-size: 1rem;
 }
 
 .savings{
@@ -81,6 +82,7 @@ body {
     color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.2s ease-in-out;
+     font-size: 1rem;
 }
 
 .account {
@@ -247,12 +249,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .pluscontainer, .minuscontainer {
     width: 100%;
-    height:600px;
+    height:auto;
     display: flex;
     flex-direction: column;
     overflow: scroll;
@@ -263,7 +265,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     height: 500px;
 }
 
@@ -275,14 +276,14 @@ body {
     margin-left: 10px;
 }
 
-.scrollSigns {
+/* .scrollSigns {
     margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
     height: 50px;
     display: flex;
     flex-direction: row;
-}
+} */
 
 .scrollSignLeft {
     width: 50%;
@@ -343,11 +344,11 @@ body {
 }
 
 .pluslist > div {
-    height: 50px;
+    height: 53px;
 }
 
 .minlist > div {
-    height: 50px;
+    height: 53px;
 }
 
 .descontainer {
@@ -534,5 +535,8 @@ body {
         width: 100%;
         margin: 0;
         border: 0;
+    }
+    .payments, .savings {
+        font-size: .9rem;
     }
 }

@@ -16,9 +16,9 @@ export const progress = (percentage) => {
     percentage < 20 ? (bar.style.backgroundColor = 'darkred', perc.style.backgroundColor = 'darkred') :
         (bar.style.backgroundColor = 'green', perc.style.backgroundColor = 'green');
 
-        if(data.budget === 0){
-            perc.style.backgroundColor = 'green'
-        }
+    if (data.budget === 0) {
+        perc.style.backgroundColor = 'green'
+    }
 }
 
 
@@ -36,9 +36,9 @@ export const halveItemsList = (type) => {
 const arrowDownLeft = document.querySelector('.scrollSignLeft')
 const arrowDownRight = document.querySelector('.scrollSignRight')
 export const displayDownArrow = () => {
-    data.items.plus.length >= 7 ? arrowDownLeft.style.display = "flex" :
+    data.items.plus.length >= 6 ? arrowDownLeft.style.display = "flex" :
         arrowDownLeft.style.display = "none"
-    data.items.minus.length >= 7 ? arrowDownRight.style.display = "flex" :
+    data.items.minus.length >= 6 ? arrowDownRight.style.display = "flex" :
         arrowDownRight.style.display = "none"
 }
 
